@@ -2,12 +2,14 @@ const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
     type Query {
-        hello: String 
+        hello: String
+        actualTime: String
     }
 `;
 const resolvers = {
     Query: {
-        hello: () => 'Hello world!'
+        hello: () => 'Hello world!',
+        actualTime: () => new Date().toISOString()
     }
 };
 
