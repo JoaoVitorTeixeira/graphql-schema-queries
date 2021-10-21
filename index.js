@@ -16,6 +16,17 @@ const users = [
     }
 ];
 
+const profiles = [
+    {
+        id: 1,
+        name: 'Admin',
+    },
+    {
+        id: 2,
+        name: 'Common',
+    }
+];
+
 const typeDefs = gql`
     scalar Date
 
@@ -26,6 +37,11 @@ const typeDefs = gql`
         age: Int
         salary: Float
         vip: Boolean
+    }
+
+    type Profile {
+        id: ID
+        name: String!
     }
 
     type Product {
@@ -44,6 +60,8 @@ const typeDefs = gql`
         numbersLottery: [Int!]!
         users: [User]
         user(id: ID): User
+        profiles: [Profile]!
+        profile(id: ID): Profile
     }
 `;
 
@@ -80,7 +98,9 @@ const resolvers = {
             return Array(6).fill(0).map(() => Math.floor(Math.random() * 60) + 1).sort(ascend);
         },
         users: () => users,
-        user: (_, { id }) => users.find(user => user.id == id)
+        user: (_, { id }) => users.find(user => user.id == id),
+        profiles: () => profiles,
+        profile: (_, { id }) => profiles.find(profile => profile.id == id),
     }
 };
 
