@@ -1,15 +1,16 @@
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
+    scalar Date
     type Query {
         hello: String
-        actualTime: String
+        actualTime: Date
     }
 `;
 const resolvers = {
     Query: {
         hello: () => 'Hello world!',
-        actualTime: () => new Date().toISOString()
+        actualTime: () => new Date()
     }
 };
 
