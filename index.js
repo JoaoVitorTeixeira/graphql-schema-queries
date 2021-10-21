@@ -43,6 +43,7 @@ const typeDefs = gql`
         featuredProduct: Product
         numbersLottery: [Int!]!
         users: [User]
+        user(id: ID): User
     }
 `;
 
@@ -79,6 +80,7 @@ const resolvers = {
             return Array(6).fill(0).map(() => Math.floor(Math.random() * 60) + 1).sort(ascend);
         },
         users: () => users,
+        user: (_, { id }) => users.find(user => user.id == id)
     }
 };
 
