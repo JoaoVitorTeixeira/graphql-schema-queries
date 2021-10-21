@@ -25,6 +25,7 @@ const typeDefs = gql`
         actualTime: Date
         loggedUser: User
         featuredProduct: Product
+        numbersLottery: [Int!]!
     }
 `;
 
@@ -55,6 +56,10 @@ const resolvers = {
                 price: 100.00,
                 discount: 0.10,
             }
+        },
+        numbersLottery: () => {
+            const ascend = (a, b) => a - b;
+            return Array(6).fill(0).map(() => Math.floor(Math.random() * 60) + 1).sort(ascend);
         }
     }
 };
