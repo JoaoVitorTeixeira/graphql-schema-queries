@@ -12,16 +12,28 @@ const typeDefs = gql`
         vip: Boolean
     }
 
+    type Product {
+        id: ID
+        name: String!
+        price: Float!
+        discount: Float
+        priceWithDiscount: Float
+    }
+
     type Query {
         hello: String
         actualTime: Date
         loggedUser: User
+        featuredProduct: Product
     }
 `;
 
 const resolvers = {
     User: {
         salary: (user) => user.realSalary,
+    },
+    Product: {
+        priceWithDiscount: (product) => product.price - product.discount,
     },
     Query: {
         hello: () => 'Hello world!',
@@ -34,6 +46,14 @@ const resolvers = {
                 age: 30,
                 realSalary: 1000.00,
                 vip: true
+            }
+        },
+        featuredProduct: () => {
+            return {
+                id: '1',
+                name: 'Product 1',
+                price: 100.00,
+                discount: 0.10,
             }
         }
     }
